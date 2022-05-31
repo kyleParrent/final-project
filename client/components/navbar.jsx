@@ -1,13 +1,6 @@
 import React from 'react';
 
 export default class Navbar extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      articles: []
-    };
-  }
-
   render() {
     return (
       <nav className="navbar navbar-expand-md bg-dark navbar-dark">
