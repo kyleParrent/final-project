@@ -1,3 +1,8 @@
+a,
+button {
+  cursor: pointer;
+}
+
 .container {
   width: 900px;
 }

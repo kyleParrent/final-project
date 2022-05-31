@@ -8,6 +8,7 @@ create schema "public";
 
 
 
+
  CREATE TABLE "public"."users" (
 	"userId" serial NOT NULL,
 	"username" TEXT NOT NULL UNIQUE,
@@ -28,6 +29,7 @@ CREATE TABLE "public"."reviewedArticles" (
 	"shortDescription" TEXT NOT NULL,
 	"content" TEXT NOT NULL,
 	"articleDate" DATE NOT NULL,
+	"source" TEXT NOT NULL,
 	CONSTRAINT "reviewedArticles_pk" PRIMARY KEY ("articleId")
 ) WITH (
   OIDS=FALSE
