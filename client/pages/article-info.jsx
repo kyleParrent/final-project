@@ -6,23 +6,51 @@ export default class ArticleInfo extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      articleInfo: []
+      articleInfo: props.article,
+      newReview: null
     };
   }
 
   componentDidMount() {
-    fetch('/api/article-info')
+    const req = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(this.state.articleInfo)
+    };
+    fetch('/api/article-info', req)
       .then(res => res.json())
       .then(result => {
+        if (result === undefined) {
+          this.setState({ newReview: true })
+        }
       });
   }
 
   render() {
-    window.location.hash = 'article-info'
     return (
       <div>
         <div className='row'>
-
+          <img></img>
+          <h1></h1>
+        </div>
+        <div className="row">
+          <div className="col-5">
+            <h3></h3>
+            <h3></h3>
+            <h3></h3>
+          </div>
+          <div className="col-5">
+            <button></button>
+            <button></button>
+          </div>
+          <div className="row">
+            <h3></h3>
+            <p></p>
+            <h3></h3>
+            <p></p>
+          </div>
         </div>
       </div>
     );
