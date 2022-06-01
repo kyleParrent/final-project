@@ -3,6 +3,26 @@ button {
   cursor: pointer;
 }
 
+h1 {
+  text-decoration: underline;
+}
+
+a:link {
+  color: black;
+}
+
+a:visited {
+  color: rgb(180, 180, 180);
+}
+
+a:hover {
+  color: red;
+}
+
 .container {
+  width: 900px;
+}
+
+.info-box {
   width: 900px;
 }
