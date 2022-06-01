@@ -13,6 +13,11 @@ values ('https://www.slashgear.com/img/gallery/how-scientists-plan-to-use-fiber-
  '2022-05-31T17:14:00Z',
  'SlashGear');
 
+insert into "users" ("username",
+	"hashedPassword",
+	"createdAt")
+values ('TimTim', '12345n', now());
+
 insert into "reviews" ("articleId",
 	"userId",
 	"likes",

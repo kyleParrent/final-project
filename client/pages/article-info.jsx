@@ -1,25 +1,32 @@
 import React from 'react';
+import AppContext from '../lib/app-context';
+import Redirect from '../components/redirect';
 
 export default class ArticleInfo extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      articles: []
+      articleInfo: []
     };
   }
 
   componentDidMount() {
-    fetch('https://gnews.io/api/v4/top-headlines?lang=en&token=db7ace67a38e6b5a80d8e73290798c87')
+    fetch('/api/article-info')
       .then(res => res.json())
       .then(result => {
-        const articles = result.articles;
-        this.setState({ articles });
       });
   }
 
   render() {
+    window.location.hash = 'article-info'
     return (
-      null
+      <div>
+        <div className='row'>
+
+        </div>
+      </div>
     );
   }
 }
+
+ArticleInfo.contextType = AppContext;
