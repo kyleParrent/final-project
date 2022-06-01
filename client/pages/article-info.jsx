@@ -1,6 +1,5 @@
 import React from 'react';
 import AppContext from '../lib/app-context';
-import Redirect from '../components/redirect';
 
 export default class ArticleInfo extends React.Component {
   constructor(props) {
@@ -23,7 +22,7 @@ export default class ArticleInfo extends React.Component {
       .then(res => res.json())
       .then(result => {
         if (result === undefined) {
-          this.setState({ newReview: true })
+          this.setState({ newReview: true });
         }
       });
   }
