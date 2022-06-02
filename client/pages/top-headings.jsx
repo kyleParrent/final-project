@@ -1,5 +1,6 @@
 import React from 'react';
-import HeadingResult from '../components/heading-result';
+import Article from '../components/article';
+import AppContext from '../lib/app-context';
 
 export default class TopHeadings extends React.Component {
   constructor(props) {
@@ -14,20 +15,24 @@ export default class TopHeadings extends React.Component {
       .then(res => res.json())
       .then(result => {
         const articles = result.articles;
+        this.context.setArticles(articles);
         this.setState({ articles });
       });
   }
 
   render() {
     return (
-    <div className="row justify-content-center">
+      <div className="row justify-content-center">
         <h1 className='d-flex justify-content-center'>Top Headings</h1>
-      {
-        this.state.articles.map((article, index) => {
-          return <HeadingResult key={index} article={article} />;
-        })
-      }
-    </div>
+        {
+          this.state.articles.map((article, index) => {
+            return <Article key={index} article={article} index={index} />;
+          })
+        }
+      </div>
+
     );
   }
 }
+
+TopHeadings.contextType = AppContext;

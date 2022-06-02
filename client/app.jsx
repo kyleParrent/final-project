@@ -4,13 +4,23 @@ import Navbar from './components/navbar';
 import ArticleInfo from './pages/article-info';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import parseRoute from './lib/parse-route';
+import AppContext from './lib/app-context';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      route: parseRoute(window.location.hash)
+      route: parseRoute(window.location.hash),
+      articles: null
     };
+    this.setArticles = this.setArticles.bind(this);
+  }
+
+  setArticles(articles) {
+    if (articles === null) {
+      return;
+    }
+    this.setState({ articles });
   }
 
   componentDidMount() {
@@ -21,23 +31,34 @@ export default class App extends React.Component {
   }
 
   renderPage() {
+    if (this.state.articles === null) {
+      window.location.hash = '';
+      return <TopHeadings />;
+    }
     const { route } = this.state;
+    const articleId = route.params.get('articleId');
     if (route.path === '') {
       return <TopHeadings />;
     }
     if (route.path === 'info') {
-      return <ArticleInfo />;
+      const articleData = this.state.articles[articleId];
+      return <ArticleInfo article={articleData} />;
     }
   }
 
   render() {
+    const contextValue = { setArticles: this.setArticles };
     return (
-      <div>
-        <Navbar />;
-        <div className='container'>
-          { this.renderPage() }
+      <AppContext.Provider value={contextValue}>
+        <div>
+          <Navbar />;
+          <div className='container'>
+            {this.renderPage()}
+          </div>
         </div>
-      </div>
+      </AppContext.Provider>
     );
   }
 }
+
+App.contextType = AppContext;

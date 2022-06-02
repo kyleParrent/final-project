@@ -3,6 +3,27 @@ button {
   cursor: pointer;
 }
 
+h1 {
+  text-decoration: underline;
+}
+
+a:link {
+  color: black;
+}
+
+a:visited {
+  color: rgb(180, 180, 180);
+}
+
 .container {
   width: 900px;
+}
+
+.info-box {
+  width: 900px;
+}
+
+.logo {
+  font-family: 'Lobster', cursive, sans-serif;
+  font-size: 34px;
 }
