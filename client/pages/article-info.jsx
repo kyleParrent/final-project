@@ -45,7 +45,7 @@ export default class ArticleInfo extends React.Component {
               </div>
               <div className="col-4">
                 <a className="btn btn-dark d-flex m-2 text-white" href={theArticle.url} role="button" target="_blank" rel="noreferrer">Full Article</a>
-                <a className="btn btn-dark d-flex m-2 text-white" href="" role="button" target="_blank">Rate/Review</a>
+                <a className="btn btn-dark d-flex m-2 text-white" href="#review" role="button" target="_blank">Rate / Review</a>
               </div>
             </div>
           </div>
