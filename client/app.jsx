@@ -32,6 +32,7 @@ export default class App extends React.Component {
 
   renderPage() {
     if (this.state.articles === null) {
+      window.location.hash = '';
       return <TopHeadings />;
     }
     const { route } = this.state;
