@@ -17,6 +17,9 @@ export default class App extends React.Component {
   }
 
   setArticles(articles) {
+    if (articles === null) {
+      return;
+    }
     this.setState({ articles });
   }
 
@@ -24,11 +27,13 @@ export default class App extends React.Component {
     window.addEventListener('hashchange', event => {
       const route = parseRoute(window.location.hash);
       this.setState({ route });
-      console.log(route.path)
     });
   }
 
   renderPage() {
+    if (this.state.articles === null) {
+      return <TopHeadings />;
+    }
     const { route } = this.state;
     const articleId = route.params.get('articleId');
     if (route.path === '') {
