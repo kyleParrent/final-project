@@ -23,7 +23,63 @@ a:visited {
   width: 900px;
 }
 
+.review-container {
+  width: 900px;
+}
+
 .logo {
-  font-family: 'Lobster', cursive, sans-serif;
+  font-family: Lobster, cursive, sans-serif;
   font-size: 34px;
+}
+
+.labels {
+  font-size: 20px;
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+.inform {
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: rgb(255, 167, 89);
+  font-weight: 600;
+}
+
+.inform-on {
+  border: 2px solid black;
+  border-radius: 5px;
+  background-color: rgb(255, 167, 89);
+  font-weight: 600;
+}
+
+.inform-off {
+  border: none;
+  border-radius: 5px;
+  background-color: rgb(255, 207, 166);
+  font-weight: 600;
+  color: rgb(102, 102, 102);
+}
+
+.persuade {
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: rgb(65, 65, 182);
+  color: azure;
+  font-weight: 500;
+}
+
+.persuade-on {
+  border: 2px solid black;
+  border-radius: 5px;
+  background-color: rgb(65, 65, 182);
+  color: azure;
+  font-weight: 500;
+}
+
+.persuade-off {
+  border: none;
+  border-radius: 5px;
+  background-color: rgb(115, 115, 182);
+  font-weight: 500;
+  color: rgb(172, 172, 172);
 }

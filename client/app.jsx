@@ -2,6 +2,7 @@ import React from 'react';
 import TopHeadings from './pages/top-headings';
 import Navbar from './components/navbar';
 import ArticleInfo from './pages/article-info';
+import ReviewForm from './pages/review-form';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import parseRoute from './lib/parse-route';
 import AppContext from './lib/app-context';
@@ -9,18 +10,22 @@ import AppContext from './lib/app-context';
 export default class App extends React.Component {
   constructor(props) {
     super(props);
+    const route = parseRoute(window.location.hash);
     this.state = {
-      route: parseRoute(window.location.hash),
-      articles: null
+      route,
+      articles: [],
+      currentArticleIndex: route.params.get('articleIndex')
     };
-    this.setArticles = this.setArticles.bind(this);
   }
 
-  setArticles(articles) {
-    if (articles === null) {
+  componentDidUpdate(previousProps, previousState) {
+    const currentRoute = this.state.route;
+    const previousRoute = previousState.route;
+    if (currentRoute === previousRoute) {
       return;
+
     }
-    this.setState({ articles });
+    this.setState({ currentArticleIndex: this.state.route.params.get('articleIndex') });
   }
 
   componentDidMount() {
@@ -28,21 +33,29 @@ export default class App extends React.Component {
       const route = parseRoute(window.location.hash);
       this.setState({ route });
     });
+    fetch('https://gnews.io/api/v4/top-headlines?lang=en&token=db7ace67a38e6b5a80d8e73290798c87')
+      .then(res => res.json())
+      .then(result => {
+        const articles = result.articles;
+        this.setState({ articles });
+      });
   }
 
   renderPage() {
-    if (this.state.articles === null) {
-      window.location.hash = '';
-      return <TopHeadings />;
-    }
     const { route } = this.state;
-    const articleId = route.params.get('articleId');
     if (route.path === '') {
-      return <TopHeadings />;
+      return <TopHeadings articles={this.state.articles}/>;
     }
     if (route.path === 'info') {
-      const articleData = this.state.articles[articleId];
-      return <ArticleInfo article={articleData} />;
+      const articleIndex = route.params.get('articleIndex');
+      const articleData = this.state.articles[articleIndex];
+
+      return <ArticleInfo article={articleData} articleIndex={articleIndex}/>;
+    }
+    if (route.path === 'review') {
+      const articleIndex = route.params.get('articleIndex');
+      const articleData = this.state.articles[articleIndex];
+      return <ReviewForm info={articleData} />;
     }
   }
 

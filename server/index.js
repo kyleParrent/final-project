@@ -24,7 +24,7 @@ app.get('/api/hello', (req, res, next) => {
   res.json({ hello: 'world' });
 });
 
-app.get(`/api/article-info`, (req, res, next) => {
+app.get('/api/article-info', (req, res, next) => {
   const { title, source } = req.query;
   const sql = `
     select *
@@ -39,7 +39,7 @@ app.get(`/api/article-info`, (req, res, next) => {
       res.json(article);
     })
     .catch(err => next(err));
-})
+});
 
 app.use(errorMiddleware);
 
