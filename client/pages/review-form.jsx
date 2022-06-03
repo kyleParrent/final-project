@@ -17,11 +17,11 @@ export default class ReviewForm extends React.Component {
   }
 
   handleClickInform(event) {
-    this.setState({ informButt: 'inform-on m-2 ms-0', perButt: 'persuade-off m-2', currentRating: true });
+    this.setState({ informButt: 'inform-on m-2 ms-0', perButt: 'persuade-off m-2', currentRating: 'inform' });
   }
 
   handleClickPersuade(event) {
-    this.setState({ informButt: 'inform-off m-2 ms-0', perButt: 'persuade-on m-2', currentRating: false });
+    this.setState({ informButt: 'inform-off m-2 ms-0', perButt: 'persuade-on m-2', currentRating: 'persuade' });
   }
 
   handleChange(event) {
@@ -37,9 +37,21 @@ export default class ReviewForm extends React.Component {
       },
       body: JSON.stringify(this.state)
     };
-    fetch('/api/user-review', req)
+    fetch('/api/article-review', req)
       .then(res => res.json())
       .then(result => {
+        const newArticleId = parseInt(result.articleId);
+        const req = {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(this.state)
+        };
+        fetch(`/api/user-review/${newArticleId}`, req)
+          .then(res => res.json())
+          .then(result => {
+          });
       });
   }
 
@@ -54,8 +66,8 @@ export default class ReviewForm extends React.Component {
             <div>
               <h5 className='labels mt-4'>What type of article is this?</h5>
               <div className='d-flex'>
-                <button onClick={this.handleClickInform} className={this.state.informButt}>Informative</button>
-                <button onClick={this.handleClickPersuade} className={this.state.perButt}>Persuasive</button>
+                <button type='button' onClick={this.handleClickInform} className={this.state.informButt}>Informative</button>
+                <button type='button' onClick={this.handleClickPersuade} className={this.state.perButt}>Persuasive</button>
               </div>
               <label htmlFor="reviewComment" className="form-label labels">Review / Reasoning</label>
               <textarea className="form-control" id="reviewComment" rows="20" onChange={this.handleChange}></textarea>

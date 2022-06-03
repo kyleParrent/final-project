@@ -20,6 +20,8 @@ if (process.env.NODE_ENV === 'development') {
 
 app.use(express.static(publicPath));
 
+app.use(express.json());
+
 app.get('/api/hello', (req, res, next) => {
   res.json({ hello: 'world' });
 });
@@ -41,7 +43,7 @@ app.get('/api/article-info', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.post('/api/user-review', (req, res, next) => {
+app.post('/api/article-review', (req, res, next) => {
   const { articleInfo } = req.body;
   const theImage = articleInfo.image;
   const theUrl = articleInfo.url;
@@ -60,6 +62,30 @@ app.post('/api/user-review', (req, res, next) => {
     .then(result => {
       const articleId = result.rows[0];
       res.json(articleId);
+    })
+    .catch(err => next(err));
+});
+
+app.post('/api/user-review/:newArticleId', (req, res, next) => {
+  const articleId = Number(req.params.newArticleId);
+  const fakeUserId = 1;
+  console.log(req.body);
+  const { currentRating, currentReview } = req.body;
+  const sql = `
+        insert into "reviews" ("articleId", "userId", "rating", "comments", "createdAt")
+        values ($1, $2, $3, $4, now())
+        returning *
+      `;
+  const params = [articleId, fakeUserId, currentRating, currentReview];
+  db.query(sql, params)
+    .then(result => {
+      const article = result.rows;
+      if (!article) {
+        res.status(404).json({
+          error: `cannot find article with articleId ${articleId}`
+        });
+      }
+      res.json(article);
     })
     .catch(err => next(err));
 });

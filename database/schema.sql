@@ -41,8 +41,6 @@ CREATE TABLE "public"."reviews" (
 	"reviewId" serial NOT NULL,
 	"articleId" int NOT NULL,
 	"userId" int NOT NULL,
-	"likes" int NOT NULL,
-	"dislikes" int NOT NULL,
 	"rating" TEXT NOT NULL,
 	"comments" TEXT NOT NULL,
 	"createdAt" timestamp with time zone NOT NULL,

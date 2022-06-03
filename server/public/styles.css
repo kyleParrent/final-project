@@ -1,3 +1,7 @@
+* {
+  font-family: 'Assistant', sans-serif;
+}
+
 a,
 button {
   cursor: pointer;
@@ -28,7 +32,7 @@ a:visited {
 }
 
 .logo {
-  font-family: Lobster, cursive, sans-serif;
+  font-family: 'Abril Fatface', cursive, sans-serif;
   font-size: 34px;
 }
 
