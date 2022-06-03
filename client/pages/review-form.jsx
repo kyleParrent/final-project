@@ -4,6 +4,7 @@ export default class ReviewForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      articleInfo: this.props.info,
       informButt: 'inform m-2 ms-0',
       perButt: 'persuade m-2',
       currentRating: null,
@@ -39,7 +40,6 @@ export default class ReviewForm extends React.Component {
     fetch('/api/user-review', req)
       .then(res => res.json())
       .then(result => {
-        return result;
       });
   }
 
@@ -50,7 +50,7 @@ export default class ReviewForm extends React.Component {
           <div className='d-flex justify-content-center'>
             <h1>YOUR OPINION:</h1>
           </div>
-          <form>
+          <form onSubmit={this.handleSubmit}>
             <div>
               <h5 className='labels mt-4'>What type of article is this?</h5>
               <div className='d-flex'>

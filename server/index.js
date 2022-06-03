@@ -41,6 +41,29 @@ app.get('/api/article-info', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.post('/api/user-review', (req, res, next) => {
+  const { articleInfo } = req.body;
+  const theImage = articleInfo.image;
+  const theUrl = articleInfo.url;
+  const theTitle = articleInfo.title;
+  const theDescription = articleInfo.description;
+  const theContent = articleInfo.content;
+  const theDate = articleInfo.publishedAt;
+  const theSource = articleInfo.source;
+  const sql = `
+        insert into "reviewedArticles" ("imageUrl", "originalUrl", "title", "shortDescription", "content", "articleDate", "source")
+        values ($1, $2, $3, $4, $5, $6, $7)
+        returning "articleId"
+      `;
+  const params = [theImage, theUrl, theTitle, theDescription, theContent, theDate, theSource];
+  db.query(sql, params)
+    .then(result => {
+      const articleId = result.rows[0];
+      res.json(articleId);
+    })
+    .catch(err => next(err));
+});
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {

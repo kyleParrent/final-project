@@ -49,7 +49,6 @@ export default class App extends React.Component {
     if (route.path === 'info') {
       const articleIndex = route.params.get('articleIndex');
       const articleData = this.state.articles[articleIndex];
-
       return <ArticleInfo article={articleData} articleIndex={articleIndex}/>;
     }
     if (route.path === 'review') {
