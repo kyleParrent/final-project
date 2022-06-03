@@ -7,7 +7,7 @@ export default function Article(props) {
           <img className="img-thumbnail" src={props.article.image}></img>
         </div>
         <h3>{ props.article.title }</h3>
-        <p>{ props.article.description }</p>
+        <p className='descript'>{ props.article.description }</p>
       </a>
   );
 }
