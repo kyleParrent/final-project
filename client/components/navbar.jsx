@@ -13,7 +13,7 @@ export default class Navbar extends React.Component {
                 <a href="#" className="nav-link">Top Headings</a>
               </li>
               <li className="nav-item">
-                <a href="#" className="nav-link">Reviews</a>
+                <a href="#user-reviews" className="nav-link">Reviews</a>
               </li>
               <li className="nav-item">
                 <a href="#" className="nav-link">Sign In</a>

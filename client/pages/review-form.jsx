@@ -4,7 +4,6 @@ export default class ReviewForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      articleInfo: this.props.info,
       informButt: 'inform m-2 ms-0',
       perButt: 'persuade m-2',
       currentRating: null,
@@ -35,7 +34,7 @@ export default class ReviewForm extends React.Component {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(this.state)
+      body: JSON.stringify({ articleInfo: this.props.info })
     };
     fetch('/api/article-review', req)
       .then(res => res.json())
@@ -53,6 +52,7 @@ export default class ReviewForm extends React.Component {
           .then(result => {
           });
       });
+    window.location.hash = '#user-reviews';
   }
 
   render() {

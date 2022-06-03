@@ -69,7 +69,6 @@ app.post('/api/article-review', (req, res, next) => {
 app.post('/api/user-review/:newArticleId', (req, res, next) => {
   const articleId = Number(req.params.newArticleId);
   const fakeUserId = 1;
-  console.log(req.body);
   const { currentRating, currentReview } = req.body;
   const sql = `
         insert into "reviews" ("articleId", "userId", "rating", "comments", "createdAt")

@@ -1,5 +1,5 @@
 * {
-  font-family: 'Assistant', sans-serif;
+  font-family: Assistant, sans-serif;
 }
 
 a,
@@ -32,7 +32,7 @@ a:visited {
 }
 
 .logo {
-  font-family: 'Abril Fatface', cursive, sans-serif;
+  font-family: "Abril Fatface", cursive, sans-serif;
   font-size: 34px;
 }
 
@@ -86,4 +86,9 @@ a:visited {
   background-color: rgb(115, 115, 182);
   font-weight: 500;
   color: rgb(172, 172, 172);
+}
+
+.refresh {
+  font-size: 34px;
+  cursor: pointer;
 }

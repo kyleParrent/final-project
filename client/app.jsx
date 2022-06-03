@@ -3,6 +3,7 @@ import TopHeadings from './pages/top-headings';
 import Navbar from './components/navbar';
 import ArticleInfo from './pages/article-info';
 import ReviewForm from './pages/review-form';
+import Reviews from './pages/reviews';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import parseRoute from './lib/parse-route';
 import AppContext from './lib/app-context';
@@ -56,14 +57,17 @@ export default class App extends React.Component {
       const articleData = this.state.articles[articleIndex];
       return <ReviewForm info={articleData} />;
     }
+    if (route.path === 'user-reviews') {
+      return <Reviews />;
+    }
   }
 
   render() {
-    const contextValue = { setArticles: this.setArticles };
+    const contextValue = { handleRefresh: this.handleRefresh };
     return (
       <AppContext.Provider value={contextValue}>
         <div>
-          <Navbar />;
+          <Navbar />
           <div className='container'>
             {this.renderPage()}
           </div>
