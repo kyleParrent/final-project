@@ -5,14 +5,20 @@ export default class ReviewForm extends React.Component {
     super(props);
     this.state = {
       informButt: 'inform m-2 ms-0',
-      perButt: 'persuade-on m-2',
-      currentRating: 'persuade',
-      currentReview: null
+      perButt: 'persuade m-2',
+      currentRating: null,
+      currentReview: null,
+      error: false
     };
     this.handleClickInform = this.handleClickInform.bind(this);
     this.handleClickPersuade = this.handleClickPersuade.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleClickOk = this.handleClickOk.bind(this);
+  }
+
+  handleClickOk() {
+    this.setState({ error: false });
   }
 
   handleClickInform(event) {
@@ -28,6 +34,10 @@ export default class ReviewForm extends React.Component {
   }
 
   handleSubmit(event) {
+    if (this.state.currentRating === null) {
+      this.setState({ error: true });
+      return;
+    }
     event.preventDefault();
     const req = {
       method: 'POST',
@@ -56,29 +66,65 @@ export default class ReviewForm extends React.Component {
   }
 
   render() {
-    return (
-      <div className='d-flex justify-content-center'>
-        <div className='review-container'>
-          <div className='d-flex justify-content-center'>
-            <h1>YOUR OPINION:</h1>
-          </div>
-          <form onSubmit={this.handleSubmit}>
-            <div>
-              <h5 className='labels mt-4'>What type of article is this?</h5>
-              <div className='d-flex'>
-                <button type='button' onClick={this.handleClickInform} className={this.state.informButt}>Informative</button>
-                <button type='button' onClick={this.handleClickPersuade} className={this.state.perButt}>Persuasive</button>
-              </div>
-              <label htmlFor="reviewComment" className="form-label labels">Review / Reasoning</label>
-              <textarea className="form-control" id="reviewComment" rows="20" onChange={this.handleChange} required></textarea>
-              <div className='d-flex justify-content-end'>
-                <button className='btn btn-dark m-3 me-0' type='submit'>SUBMIT</button>
-              </div>
+    if (this.state.error === true) {
+      return (
+        <div className='d-flex justify-content-center'>
+          <div className='review-container'>
+            <div className='d-flex justify-content-center'>
+              <h1>YOUR OPINION:</h1>
             </div>
-          </form>
+            <form onSubmit={this.handleSubmit}>
+              <div>
+                <h5 className='labels mt-4'>What type of article is this?</h5>
+                <div className='d-flex'>
+                  <button type='button' onClick={this.handleClickInform} className={this.state.informButt}>Informative</button>
+                  <button type='button' onClick={this.handleClickPersuade} className={this.state.perButt}>Persuasive</button>
+                </div>
+                <label htmlFor="reviewComment" className="form-label labels">Review / Reasoning</label>
+                <textarea className="form-control" id="reviewComment" rows="20" onChange={this.handleChange} required></textarea>
+                <div className='d-flex justify-content-end'>
+                  <button className='btn btn-dark m-3 me-0' type='submit'>SUBMIT</button>
+                </div>
+              </div>
+              <div className='overlay d-flex justify-content-center align-items-center'>
+                <div className='problem'>
+                  <div className='d-flex justify-content-center mt-4'>
+                    <h3>You need to select an article type</h3>
+                  </div>
+                  <div className='d-flex justify-content-center mt-3'>
+                    <button type='button' onClick={this.handleClickOk} className='btn btn-dark'>OK</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
         </div>
-      </div>
-    );
+      );
+    } else {
+      return (
+        <div className='d-flex justify-content-center'>
+          <div className='review-container'>
+            <div className='d-flex justify-content-center'>
+              <h1>YOUR OPINION:</h1>
+            </div>
+            <form onSubmit={this.handleSubmit}>
+              <div>
+                <h5 className='labels mt-4'>What type of article is this?</h5>
+                <div className='d-flex'>
+                  <button type='button' onClick={this.handleClickInform} className={this.state.informButt}>Informative</button>
+                  <button type='button' onClick={this.handleClickPersuade} className={this.state.perButt}>Persuasive</button>
+                </div>
+                <label htmlFor="reviewComment" className="form-label labels">Review / Reasoning</label>
+                <textarea className="form-control" id="reviewComment" rows="20" onChange={this.handleChange} required></textarea>
+                <div className='d-flex justify-content-end'>
+                  <button className='btn btn-dark m-3 me-0' type='submit'>SUBMIT</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      );
+    }
   }
 
 }
