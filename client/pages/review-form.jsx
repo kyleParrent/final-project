@@ -5,9 +5,9 @@ export default class ReviewForm extends React.Component {
     super(props);
     this.state = {
       informButt: 'inform m-2 ms-0',
-      perButt: 'persuade m-2',
-      currentRating: null,
-      currentReview: ''
+      perButt: 'persuade-on m-2',
+      currentRating: 'persuade',
+      currentReview: null
     };
     this.handleClickInform = this.handleClickInform.bind(this);
     this.handleClickPersuade = this.handleClickPersuade.bind(this);
@@ -50,9 +50,9 @@ export default class ReviewForm extends React.Component {
         fetch(`/api/user-review/${newArticleId}`, req)
           .then(res => res.json())
           .then(result => {
+            window.location.hash = '#user-reviews';
           });
       });
-    window.location.hash = '#user-reviews';
   }
 
   render() {
@@ -70,7 +70,7 @@ export default class ReviewForm extends React.Component {
                 <button type='button' onClick={this.handleClickPersuade} className={this.state.perButt}>Persuasive</button>
               </div>
               <label htmlFor="reviewComment" className="form-label labels">Review / Reasoning</label>
-              <textarea className="form-control" id="reviewComment" rows="20" onChange={this.handleChange}></textarea>
+              <textarea className="form-control" id="reviewComment" rows="20" onChange={this.handleChange} required></textarea>
               <div className='d-flex justify-content-end'>
                 <button className='btn btn-dark m-3 me-0' type='submit'>SUBMIT</button>
               </div>
