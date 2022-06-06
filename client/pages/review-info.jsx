@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class Reviews extends React.Component {
+export default class ReviewInfo extends React.Component {
   render() {
     return (
       <div className='d-flex justify-content-center m-4'>

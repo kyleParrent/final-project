@@ -3,7 +3,7 @@ import TopHeadings from './pages/top-headings';
 import Navbar from './components/navbar';
 import ArticleInfo from './pages/article-info';
 import ReviewForm from './pages/review-form';
-import Reviews from './pages/reviews';
+import ReviewInfo from './pages/review-info';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import parseRoute from './lib/parse-route';
 import AppContext from './lib/app-context';
@@ -58,7 +58,7 @@ export default class App extends React.Component {
       return <ReviewForm info={articleData} />;
     }
     if (route.path === 'user-reviews') {
-      return <Reviews />;
+      return <ReviewInfo />;
     }
   }
 
