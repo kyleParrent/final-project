@@ -71,7 +71,7 @@ export default class ReviewForm extends React.Component {
         <div className='d-flex justify-content-center'>
           <div className='review-container'>
             <div className='d-flex justify-content-center'>
-              <h1>YOUR OPINION:</h1>
+              <h1>Your Opinion:</h1>
             </div>
             <form onSubmit={this.handleSubmit}>
               <div>
@@ -89,10 +89,10 @@ export default class ReviewForm extends React.Component {
               <div className='overlay d-flex justify-content-center align-items-center'>
                 <div className='problem'>
                   <div className='d-flex justify-content-center mt-4'>
-                    <h3>You need to select an article type</h3>
+                    <h3 className='no-data'>You need to select an article type</h3>
                   </div>
                   <div className='d-flex justify-content-center mt-3'>
-                    <button type='button' onClick={this.handleClickOk} className='btn btn-dark'>OK</button>
+                    <button type='button' onClick={this.handleClickOk} className='btn btn-light'>OK</button>
                   </div>
                 </div>
               </div>
@@ -104,8 +104,8 @@ export default class ReviewForm extends React.Component {
       return (
         <div className='d-flex justify-content-center'>
           <div className='review-container'>
-            <div className='d-flex justify-content-center'>
-              <h1>YOUR OPINION:</h1>
+            <div className='d-flex justify-content-center mt-3'>
+              <h1>Your Opinion:</h1>
             </div>
             <form onSubmit={this.handleSubmit}>
               <div>

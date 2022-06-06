@@ -71,7 +71,7 @@ a:visited {
 .persuade {
   border: 1px solid black;
   border-radius: 5px;
-  background-color: rgb(65, 65, 182);
+  background-color: #009ffd;
   color: azure;
   font-weight: 500;
 }
@@ -79,7 +79,7 @@ a:visited {
 .persuade-on {
   border: 2px solid black;
   border-radius: 5px;
-  background-color: rgb(65, 65, 182);
+  background-color: #009ffd;
   color: azure;
   font-weight: 500;
 }
@@ -87,7 +87,7 @@ a:visited {
 .persuade-off {
   border: none;
   border-radius: 5px;
-  background-color: rgb(115, 115, 182);
+  background-color: #0373b4;
   font-weight: 500;
   color: rgb(172, 172, 172);
 }
@@ -102,9 +102,9 @@ a:visited {
 }
 
 .problem {
-  height: 200px;
+  height: 150px;
   width: 400px;
-  background-color: white;
+  background-color: rgb(24, 24, 24);
   border-radius: 10px;
 }
 
@@ -119,6 +119,11 @@ a:visited {
   background-color: rgb(0 0 0 / 80%);
 }
 
+.no-data {
+  color: white;
+  text-decoration: underline;
+}
+
 @media screen and (max-width: 430px) {
   h3 {
     font-size: 20px !important;
@@ -126,6 +131,12 @@ a:visited {
 
   .descript {
     font-size: 16px !important;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .problem {
+    border-radius: 0;
   }
 }
 
