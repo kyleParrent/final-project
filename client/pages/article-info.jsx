@@ -5,27 +5,18 @@ export default class ArticleInfo extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      articleInfo: props.article,
-      articleId: null
+      articleId: props.articleId,
+      articleInfo: props.info,
+      reviewRating: null,
+      reviewComment: null
     };
   }
 
-  componentDidMount() {
-    const theArticle = this.state.articleInfo;
-    const theTitle = theArticle.title;
-    const theSource = theArticle.source.name;
-    fetch(`/api/article-info?title=${theTitle}&source=${theSource}`)
-      .then(res => res.json())
-      .then(result => {
-        if (result.length !== 0) {
-          const theId = result[0].articleId;
-          this.setState({ articleId: theId });
-        }
-      });
-  }
-
   render() {
-    const theArticle = this.state.articleInfo;
+    if (!this.props.article) {
+      return null;
+    }
+    const theArticle = this.props.article;
     const theDate = theArticle.publishedAt;
     const date = theDate.split('T');
     return (
@@ -45,7 +36,7 @@ export default class ArticleInfo extends React.Component {
               </div>
               <div className="col-4">
                 <a className="btn btn-dark d-flex m-2 text-white" href={theArticle.url} role="button" target="_blank" rel="noreferrer">Full Article</a>
-                <a className="btn btn-dark d-flex m-2 text-white" href="#review" role="button" target="_blank">Rate / Review</a>
+                <a className="btn btn-dark d-flex m-2 text-white" href={`#review?articleIndex=${this.props.articleIndex}`} role="button">Rate / Review</a>
               </div>
             </div>
           </div>

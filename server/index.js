@@ -20,11 +20,13 @@ if (process.env.NODE_ENV === 'development') {
 
 app.use(express.static(publicPath));
 
+app.use(express.json());
+
 app.get('/api/hello', (req, res, next) => {
   res.json({ hello: 'world' });
 });
 
-app.get(`/api/article-info`, (req, res, next) => {
+app.get('/api/article-info', (req, res, next) => {
   const { title, source } = req.query;
   const sql = `
     select *
@@ -39,7 +41,53 @@ app.get(`/api/article-info`, (req, res, next) => {
       res.json(article);
     })
     .catch(err => next(err));
-})
+});
+
+app.post('/api/article-review', (req, res, next) => {
+  const { articleInfo } = req.body;
+  const theImage = articleInfo.image;
+  const theUrl = articleInfo.url;
+  const theTitle = articleInfo.title;
+  const theDescription = articleInfo.description;
+  const theContent = articleInfo.content;
+  const theDate = articleInfo.publishedAt;
+  const theSource = articleInfo.source;
+  const sql = `
+        insert into "reviewedArticles" ("imageUrl", "originalUrl", "title", "shortDescription", "content", "articleDate", "source")
+        values ($1, $2, $3, $4, $5, $6, $7)
+        returning "articleId"
+      `;
+  const params = [theImage, theUrl, theTitle, theDescription, theContent, theDate, theSource];
+  db.query(sql, params)
+    .then(result => {
+      const articleId = result.rows[0];
+      res.json(articleId);
+    })
+    .catch(err => next(err));
+});
+
+app.post('/api/user-review/:newArticleId', (req, res, next) => {
+  const articleId = Number(req.params.newArticleId);
+  const fakeUserId = 1;
+  const { currentRating, currentReview } = req.body;
+  const sql = `
+        insert into "reviews" ("articleId", "userId", "rating", "comments", "createdAt")
+        values ($1, $2, $3, $4, now())
+        returning *
+      `;
+  const params = [articleId, fakeUserId, currentRating, currentReview];
+  db.query(sql, params)
+    .then(result => {
+      const article = result.rows;
+      if (!article) {
+        res.status(404).json({
+          error: `cannot find article with articleId ${articleId}`
+        });
+      }
+      res.json(article);
+    })
+    .catch(err => next(err));
+});
 
 app.use(errorMiddleware);
 
