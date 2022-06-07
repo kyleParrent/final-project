@@ -124,6 +124,22 @@ a:visited {
   text-decoration: underline;
 }
 
+.no-button {
+  width: 100px;
+  text-align: center;
+}
+
+.reviews-box {
+  border: 1px solid black;
+  width: 900px;
+}
+
+.review-link {
+  text-align: center;
+  width: 800px;
+  border: 1px solid gray;
+}
+
 @media screen and (max-width: 430px) {
   h3 {
     font-size: 20px !important;

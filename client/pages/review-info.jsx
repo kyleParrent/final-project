@@ -36,11 +36,15 @@ export default class ReviewInfo extends React.Component {
         <div className='d-flex justify-content-center align-items-center mt-4'>
           <h1>Reviews</h1>
         </div>
-        {
-          this.state.reviews.map((review, index) => {
-            return <Review key={index} review={review} />;
-          })
-        }
+        <div className='d-flex justify-content-center'>
+          <div className='reviews-box'>
+          {
+            this.state.reviews.map((review, index) => {
+              return <Review key={index} review={review} />;
+            })
+          }
+          </div>
+        </div>
       </div>
 
     );
