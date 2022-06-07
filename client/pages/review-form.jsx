@@ -39,29 +39,49 @@ export default class ReviewForm extends React.Component {
       this.setState({ error: true });
       return;
     }
-    const req = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ articleInfo: this.props.info })
-    };
-    fetch('/api/article-review', req)
+    fetch(`/api/article-info?title=${this.props.info.title}&publishedAt=${this.props.info.publishedAt}`)
       .then(res => res.json())
       .then(result => {
-        const newArticleId = parseInt(result.articleId);
-        const req = {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(this.state)
-        };
-        fetch(`/api/user-review/${newArticleId}`, req)
-          .then(res => res.json())
-          .then(result => {
-            window.location.hash = '#user-reviews?userId=1';
-          });
+        if (!result.articleId) {
+          const req = {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ articleInfo: this.props.info })
+          };
+          fetch('/api/article-review', req)
+            .then(res => res.json())
+            .then(result => {
+              const newArticleId = parseInt(result.articleId);
+              const req = {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(this.state)
+              };
+              fetch(`/api/user-review/${newArticleId}`, req)
+                .then(res => res.json())
+                .then(result => {
+                  window.location.hash = '#user-reviews?userId=1';
+                });
+            });
+        } else {
+          const articleId = parseInt(result.articleId);
+          const req = {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(this.state)
+          };
+          fetch(`/api/user-review/${articleId}`, req)
+            .then(res => res.json())
+            .then(result => {
+              window.location.hash = '#user-reviews?userId=1';
+            });
+        }
       });
   }
 

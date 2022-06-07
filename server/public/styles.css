@@ -129,9 +129,17 @@ a:visited {
   text-align: center;
 }
 
+.no-reviews {
+  width: 900px;
+}
+
+.outline {
+  border: 1px solid black;
+}
+
 .reviews-box {
   border: 1px solid black;
-  width: 900px;
+  width: 900px !important;
 }
 
 .review-link {
@@ -154,6 +162,15 @@ a:visited {
   .problem {
     border-radius: 0;
   }
+
+  .info-button {
+    font-size: 12px !important;
+  }
+
+  #main {
+    margin: 5px !important;
+    margin-top: 20px !important;
+  }
 }
 
 @media screen and (max-width: 380px) {
@@ -163,6 +180,12 @@ a:visited {
 
   .descript {
     font-size: 12px !important;
+  }
+}
+
+@media screen and (max-width: 340px) {
+  .info-button {
+    font-size: 8px !important;
   }
 }
 
