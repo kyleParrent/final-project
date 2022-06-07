@@ -23,13 +23,13 @@ create schema "public";
 
 CREATE TABLE "public"."reviewedArticles" (
 	"articleId" serial NOT NULL,
-	"imageUrl" TEXT NOT NULL,
-	"originalUrl" TEXT NOT NULL,
+	"image" TEXT NOT NULL,
+	"url" TEXT NOT NULL,
 	"title" TEXT NOT NULL,
-	"shortDescription" TEXT NOT NULL,
+	"description" TEXT NOT NULL,
 	"content" TEXT NOT NULL,
-	"articleDate" DATE NOT NULL,
-	"source" TEXT NOT NULL,
+	"publishedAt" DATE NOT NULL,
+	"source" json NOT NULL,
 	CONSTRAINT "reviewedArticles_pk" PRIMARY KEY ("articleId")
 ) WITH (
   OIDS=FALSE

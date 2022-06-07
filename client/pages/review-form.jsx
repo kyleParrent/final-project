@@ -34,11 +34,11 @@ export default class ReviewForm extends React.Component {
   }
 
   handleSubmit(event) {
+    event.preventDefault();
     if (this.state.currentRating === null) {
       this.setState({ error: true });
       return;
     }
-    event.preventDefault();
     const req = {
       method: 'POST',
       headers: {
@@ -60,7 +60,7 @@ export default class ReviewForm extends React.Component {
         fetch(`/api/user-review/${newArticleId}`, req)
           .then(res => res.json())
           .then(result => {
-            window.location.hash = '#user-reviews';
+            window.location.hash = '#user-reviews?userId=1';
           });
       });
   }

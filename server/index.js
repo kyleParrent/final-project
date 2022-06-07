@@ -43,6 +43,38 @@ app.get('/api/article-info', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/reviews/:userId', (req, res, next) => {
+  const userId = Number(req.params.userId);
+  const sql = `
+    select *
+      from "reviews"
+      where "userId" = $1
+  `;
+  const params = [userId];
+  db.query(sql, params)
+    .then(result => {
+      const theReviews = result.rows;
+      res.json(theReviews);
+    })
+    .catch(err => next(err));
+});
+
+app.get('/api/articles/:articleId', (req, res, next) => {
+  const articleId = Number(req.params.articleId);
+  const sql = `
+    select *
+      from "reviewedArticles"
+      where "articleId" = $1
+  `;
+  const params = [articleId];
+  db.query(sql, params)
+    .then(result => {
+      const theArticle = result.rows[0];
+      res.json(theArticle);
+    })
+    .catch(err => next(err));
+});
+
 app.post('/api/article-review', (req, res, next) => {
   const { articleInfo } = req.body;
   const theImage = articleInfo.image;
@@ -53,7 +85,7 @@ app.post('/api/article-review', (req, res, next) => {
   const theDate = articleInfo.publishedAt;
   const theSource = articleInfo.source;
   const sql = `
-        insert into "reviewedArticles" ("imageUrl", "originalUrl", "title", "shortDescription", "content", "articleDate", "source")
+        insert into "reviewedArticles" ("image", "url", "title", "description", "content", "publishedAt", "source")
         values ($1, $2, $3, $4, $5, $6, $7)
         returning "articleId"
       `;
