@@ -23,4 +23,4 @@ insert into "reviews" ("articleId",
 	"rating",
 	"comments",
   "createdAt")
-values ('1', '1', 'true', 'I liked this article but you could also say I hated it too.', now());
+values ('1', '1', 'inform', 'I liked this article but you could also say I hated it too.', now());

@@ -1,31 +1,44 @@
 import React from 'react';
 import AppContext from '../lib/app-context';
+import AllReviews from '../components/all-reviews';
 
 export default class ArticleInfo extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       articleInfo: null,
-      reviewRating: null,
-      reviewComment: null
+      articleReviews: []
     };
   }
 
   componentDidMount() {
     if (this.props.reviewedArticleId) {
-      const req = {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      };
-      fetch(`/api/articles/${this.props.reviewedArticleId}`, req)
+      let artInfo;
+      fetch(`/api/articles/${this.props.reviewedArticleId}`)
         .then(res => res.json())
         .then(result => {
-          this.setState({ articleInfo: result });
+          artInfo = result;
+          fetch(`/api/all-user-reviews/${this.props.reviewedArticleId}`)
+            .then(res => res.json())
+            .then(result => {
+              this.setState({ articleInfo: artInfo, articleReviews: result });
+            });
         });
     } else {
-      this.setState({ articleInfo: this.props.article });
+      fetch(`/api/article-info?title=${this.props.article.title}&publishedAt=${this.props.article.publishedAt}`)
+        .then(res => res.json())
+        .then(result => {
+          if (!result.articleId) {
+            this.setState({ articleInfo: this.props.article });
+            return;
+          }
+          const artId = result.articleId;
+          fetch(`/api/all-user-reviews/${artId}`)
+            .then(res => res.json())
+            .then(result => {
+              this.setState({ articleInfo: this.props.article, articleReviews: result });
+            });
+        });
     }
   }
 
@@ -39,6 +52,17 @@ export default class ArticleInfo extends React.Component {
     const theArticle = this.state.articleInfo;
     const theDate = theArticle.publishedAt;
     const date = theDate.split('T');
+    let newSection;
+    if (this.state.articleReviews.length === 0) {
+      newSection = <div className='bg-dark text-light'>
+                        <h3>No User Reviews</h3>
+                      </div>;
+    } else {
+      newSection = this.state.articleReviews.map((article, index) => {
+        return <AllReviews key={index} article={article} index={index} />;
+      });
+
+    }
     return (
         <div className='d-flex justify-content-center m-4'>
           <div className='border border-2 border-dark info-box'>
@@ -69,6 +93,9 @@ export default class ArticleInfo extends React.Component {
               </div>
             </div>
           </div>
+        {
+          newSection
+        }
         </div>
     );
   }

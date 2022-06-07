@@ -27,17 +27,21 @@ app.get('/api/hello', (req, res, next) => {
 });
 
 app.get('/api/article-info', (req, res, next) => {
-  const { title, source } = req.query;
+  const { title, publishedAt } = req.query;
   const sql = `
     select *
       from "reviewedArticles"
      where "title" = $1
-     and   "source" = $2
+     and   "publishedAt" = $2
   `;
-  const params = [title, source];
+  const params = [title, publishedAt];
   db.query(sql, params)
     .then(result => {
-      const article = result.rows;
+      const article = result.rows[0];
+      if (!article) {
+        const anError = { error: 'could not find article' };
+        res.json(anError);
+      }
       res.json(article);
     })
     .catch(err => next(err));
@@ -70,6 +74,22 @@ app.get('/api/articles/:articleId', (req, res, next) => {
   db.query(sql, params)
     .then(result => {
       const theArticle = result.rows[0];
+      res.json(theArticle);
+    })
+    .catch(err => next(err));
+});
+
+app.get('/api/all-user-reviews/:articleId', (req, res, next) => {
+  const articleId = Number(req.params.articleId);
+  const sql = `
+    select *
+      from "reviews"
+      where "articleId" = $1
+  `;
+  const params = [articleId];
+  db.query(sql, params)
+    .then(result => {
+      const theArticle = result.rows;
       res.json(theArticle);
     })
     .catch(err => next(err));
