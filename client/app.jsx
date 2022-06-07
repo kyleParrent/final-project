@@ -49,8 +49,9 @@ export default class App extends React.Component {
     }
     if (route.path === 'info') {
       const articleIndex = route.params.get('articleIndex');
+      const reviewArticleId = route.params.get('articleId');
       const articleData = this.state.articles[articleIndex];
-      return <ArticleInfo article={articleData} articleIndex={articleIndex}/>;
+      return <ArticleInfo article={articleData} articleIndex={articleIndex} reviewedArticleId={reviewArticleId}/>;
     }
     if (route.path === 'review') {
       const articleIndex = route.params.get('articleIndex');
@@ -58,7 +59,8 @@ export default class App extends React.Component {
       return <ReviewForm info={articleData} />;
     }
     if (route.path === 'user-reviews') {
-      return <ReviewInfo />;
+      const userId = route.params.get('userId');
+      return <ReviewInfo userId={userId}/>;
     }
   }
 

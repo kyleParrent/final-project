@@ -1,9 +1,9 @@
-insert into "reviewedArticles" ("imageUrl",
-	"originalUrl",
+insert into "reviewedArticles" ("image",
+	"url",
 	"title",
-	"shortDescription",
+	"description",
 	"content",
-	"articleDate",
+	"publishedAt",
 	"source")
 values ('https://www.slashgear.com/img/gallery/how-scientists-plan-to-use-fiber-optic-technology-to-detect-earthquakes-and-tides/l-intro-1653680998.jpg',
  'https://www.slashgear.com/879839/how-scientists-plan-to-use-fiber-optic-technology-to-detect-earthquakes-and-tides/',
