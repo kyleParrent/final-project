@@ -66,7 +66,7 @@ export default class SearchForm extends React.Component {
       <div className='d-flex justify-content-center'>
         <div className='search-container'>
           <div className='d-flex justify-content-center mt-3'>
-            <h3>Search</h3>
+            <h2>Search</h2>
           </div>
           <form onSubmit={this.handleSubmit}>
             <div>
@@ -146,7 +146,7 @@ export default class SearchForm extends React.Component {
               </div>
               <div className='d-flex justify-content-center border-bottom border-end border-start border-2 border-dark'>
                 <div className='d-flex justify-content-end search-bar'>
-                  <button className='btn btn-dark mb-2' type='submit'>SUBMIT</button>
+                  <button className='btn btn-dark mb-2 btn-sm' type='submit'>SUBMIT</button>
                 </div>
               </div>
             </div>
