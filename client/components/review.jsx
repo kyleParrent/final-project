@@ -27,12 +27,14 @@ export default class Review extends React.Component {
               <div className={theButtonClass}>
                 {theButtonText}
               </div>
-              <p className='mb-0 mt-2'>By: Fake Username Joe</p>
+              <p className='mb-0 mt-2'>By: Fakeusername Joe</p>
             </div>
           </div>
           <div className="row">
-            <p className='mt-2 mb-2'>Comments:</p>
-            <p>{this.props.review.comments}</p>
+            <div className='col-12'>
+              <p className='mt-2 mb-2'>Comments:</p>
+              <p>{this.props.review.comments}</p>
+            </div>
           </div>
           <div className="row">
             <div className="col-12 d-flex justify-content-center">
