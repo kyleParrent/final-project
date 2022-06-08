@@ -10,6 +10,9 @@ export default class Navbar extends React.Component {
           <div className="collapse navbar-collapse" id="navmenu">
             <ul className="navbar-nav ms-auto">
               <li className="nav-item">
+                <a href="#search" className="nav-link">Search</a>
+              </li>
+              <li className="nav-item">
                 <a href="#" className="nav-link">Top Headings</a>
               </li>
               <li className="nav-item">

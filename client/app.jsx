@@ -4,6 +4,7 @@ import Navbar from './components/navbar';
 import ArticleInfo from './pages/article-info';
 import ReviewForm from './pages/review-form';
 import ReviewInfo from './pages/review-info';
+import SearchForm from './pages/search-form';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import parseRoute from './lib/parse-route';
 import AppContext from './lib/app-context';
@@ -61,6 +62,9 @@ export default class App extends React.Component {
     if (route.path === 'user-reviews') {
       const userId = route.params.get('userId');
       return <ReviewInfo userId={userId}/>;
+    }
+    if (route.path === 'search') {
+      return <SearchForm />;
     }
   }
 

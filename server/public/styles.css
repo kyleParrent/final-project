@@ -35,6 +35,14 @@ a:visited {
   width: 900px;
 }
 
+.search-container {
+  width: 500px;
+}
+
+.search-bar {
+  width: 400px !important;
+}
+
 .logo {
   font-family: "Abril Fatface", cursive, sans-serif;
   font-size: 34px;
@@ -149,6 +157,12 @@ a:visited {
 }
 
 @media screen and (max-width: 430px) {
+  .search-bar {
+    width: 300px !important;
+  }
+}
+
+@media screen and (max-width: 430px) {
   h3 {
     font-size: 20px !important;
   }
@@ -187,6 +201,10 @@ a:visited {
   .info-button {
     font-size: 8px !important;
   }
+
+  .search-bar {
+    width: 250px !important;
+  }
 }
 
 @media screen and (max-width: 320px) {
@@ -202,5 +220,9 @@ a:visited {
 
   .descript {
     font-size: 8px !important;
+  }
+
+  .search-bar {
+    width: 225px !important;
   }
 }
