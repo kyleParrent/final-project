@@ -29,30 +29,19 @@ export default class SearchForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    let lang = '&lang=';
-    let country = '&country=';
-    let keyString = '';
     const keyArray = this.state.keywords.split(' ');
-    keyArray.map(keyword => {
-      if (keyword === keyArray[0]) {
-        keyString += `q=${keyword}`;
-        return keyString;
-      } else {
-        keyString += `&q=${keyword}`;
-        return keyString;
-      }
-    });
+    const searchParams = new URLSearchParams();
     if (this.state.language !== '') {
-      lang += this.state.language;
-    } else {
-      lang = '';
+      searchParams.set('lang', this.state.language);
     }
     if (this.state.country !== '') {
-      country += this.state.country;
-    } else {
-      country = '';
+      searchParams.set('country', this.state.country);
     }
-    const reqString = `https://gnews.io/api/v4/search?${keyString}${lang}${country}&token=db7ace67a38e6b5a80d8e73290798c87`;
+    keyArray.forEach(keyword => {
+      searchParams.append('q', keyword);
+    });
+    const queryString = searchParams.toString();
+    const reqString = `https://gnews.io/api/v4/search?${queryString}&token=db7ace67a38e6b5a80d8e73290798c87`;
     fetch(reqString)
       .then(res => res.json())
       .then(result => {
