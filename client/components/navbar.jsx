@@ -10,13 +10,16 @@ export default class Navbar extends React.Component {
           <div className="collapse navbar-collapse" id="navmenu">
             <ul className="navbar-nav ms-auto">
               <li className="nav-item">
-                <a href="#" className="nav-link">Top Headings</a>
+                <a href="#search" className="nav-link text-decoration-underline">Search</a>
               </li>
               <li className="nav-item">
-                <a href="#user-reviews?userId=1" className="nav-link">Reviews</a>
+                <a href="#" className="nav-link text-decoration-underline">Top Headings</a>
               </li>
               <li className="nav-item">
-                <a href="#" className="nav-link">Sign In</a>
+                <a href="#user-reviews?userId=1" className="nav-link text-decoration-underline">Reviews</a>
+              </li>
+              <li className="nav-item">
+                <a href="#" className="nav-link text-decoration-underline">Sign In</a>
               </li>
             </ul>
           </div>

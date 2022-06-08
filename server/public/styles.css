@@ -35,6 +35,14 @@ a:visited {
   width: 900px;
 }
 
+.search-container {
+  width: 500px;
+}
+
+.search-bar {
+  width: 400px !important;
+}
+
 .logo {
   font-family: "Abril Fatface", cursive, sans-serif;
   font-size: 34px;
