@@ -1,4 +1,6 @@
 import React from 'react';
+import AppContext from '../lib/app-context';
+import Redirect from '../components/redirect';
 
 export default class ReviewForm extends React.Component {
   constructor(props) {
@@ -86,6 +88,8 @@ export default class ReviewForm extends React.Component {
   }
 
   render() {
+    const { user } = this.context;
+    if (user) return <Redirect to="sign-in" />;
     if (this.state.error === true) {
       return (
         <div className='d-flex justify-content-center'>
@@ -148,3 +152,5 @@ export default class ReviewForm extends React.Component {
   }
 
 }
+
+ReviewForm.contextType = AppContext;

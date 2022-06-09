@@ -6,6 +6,7 @@ import ReviewForm from './pages/review-form';
 import ReviewInfo from './pages/review-info';
 import SearchForm from './pages/search-form';
 import Authorize from './pages/authorize';
+import jwtDecode from 'jwt-decode';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import parseRoute from './lib/parse-route';
 import AppContext from './lib/app-context';
@@ -21,6 +22,8 @@ export default class App extends React.Component {
       articles: [],
       currentArticleIndex: route.params.get('articleIndex')
     };
+    this.handleSignIn = this.handleSignIn.bind(this);
+    this.handleSignOut = this.handleSignOut.bind(this);
   }
 
   componentDidUpdate(previousProps, previousState) {
@@ -55,12 +58,26 @@ export default class App extends React.Component {
       const route = parseRoute(window.location.hash);
       this.setState({ route });
     });
+    const token = window.localStorage.getItem('react-context-jwt');
+    const user = token ? jwtDecode(token) : null;
+    this.setState({ user, isAuthorizing: false });
     fetch('https://gnews.io/api/v4/top-headlines?lang=en&token=db7ace67a38e6b5a80d8e73290798c87')
       .then(res => res.json())
       .then(result => {
         const articles = result.articles;
         this.setState({ articles });
       });
+  }
+
+  handleSignIn(result) {
+    const { user, token } = result;
+    window.localStorage.setItem('react-context-jwt', token);
+    this.setState({ user });
+  }
+
+  handleSignOut() {
+    window.localStorage.removeItem('react-context-jwt');
+    this.setState({ user: null });
   }
 
   renderPage() {
@@ -89,14 +106,15 @@ export default class App extends React.Component {
     if (route.path === 'search-results') {
       return <SearchForm articles={this.state.articles}/>;
     }
-    if (route.path === 'sign-up') {
+    if (route.path === 'sign-up' || route.path === 'sign-in') {
       return <Authorize />;
     }
   }
 
   render() {
-    const { route } = this.state;
-    const contextValue = { route };
+    const { user, route } = this.state;
+    const { handleSignIn, handleSignOut } = this;
+    const contextValue = { user, route, handleSignIn, handleSignOut };
     return (
       <AppContext.Provider value={contextValue}>
         <div>
