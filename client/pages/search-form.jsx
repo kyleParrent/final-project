@@ -47,18 +47,33 @@ export default class SearchForm extends React.Component {
   render() {
     let result = null;
     if (this.props.articles) {
-      result = (
-        <div className="row justify-content-center">
-          <div className='d-flex justify-content-center align-items-center mt-4'>
-            <h2>Results</h2>
+      if (this.props.articles.length === 0) {
+        result = (
+          <div className="row justify-content-center">
+            <div className='d-flex justify-content-center align-items-center mt-4'>
+              <h2>Results</h2>
+            </div>
+            <div className="col-5 bg-white border border-2 border-dark m-2">
+              <div className='d-flex justify-content-center'>
+                <h3 className='m-2'>Nothing Found</h3>
+              </div>
+            </div>
           </div>
-          {
-            this.props.articles.map((article, index) => {
-              return <Article key={index} article={article} index={index} />;
-            })
-          }
-        </div>
-      );
+        );
+      } else {
+        result = (
+          <div className="row justify-content-center">
+            <div className='d-flex justify-content-center align-items-center mt-4'>
+              <h2>Results</h2>
+            </div>
+            {
+              this.props.articles.map((article, index) => {
+                return <Article key={index} article={article} index={index} />;
+              })
+            }
+          </div>
+        );
+      }
     }
     return (
       <div>
