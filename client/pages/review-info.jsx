@@ -38,9 +38,9 @@ export default class ReviewInfo extends React.Component {
           </div>
           <div className='reviews-box'>
             {
-                      this.state.reviews.map((review, index) => {
-                        return <Review key={index} review={review} />;
-                      })
+              this.state.reviews.map((review, index) => {
+                return <Review key={index} review={review} />;
+              })
             }
           </div>
         </div>
