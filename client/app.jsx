@@ -5,6 +5,7 @@ import ArticleInfo from './pages/article-info';
 import ReviewForm from './pages/review-form';
 import ReviewInfo from './pages/review-info';
 import SearchForm from './pages/search-form';
+import Authorize from './pages/authorize';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import parseRoute from './lib/parse-route';
 import AppContext from './lib/app-context';
@@ -14,6 +15,8 @@ export default class App extends React.Component {
     super(props);
     const route = parseRoute(window.location.hash);
     this.state = {
+      user: null,
+      isAuthorizing: true,
       route,
       articles: [],
       currentArticleIndex: route.params.get('articleIndex')
@@ -86,10 +89,14 @@ export default class App extends React.Component {
     if (route.path === 'search-results') {
       return <SearchForm articles={this.state.articles}/>;
     }
+    if (route.path === 'sign-up') {
+      return <Authorize />;
+    }
   }
 
   render() {
-    const contextValue = { handleRefresh: this.handleRefresh };
+    const { route } = this.state;
+    const contextValue = { route };
     return (
       <AppContext.Provider value={contextValue}>
         <div>
