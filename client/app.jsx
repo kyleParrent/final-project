@@ -25,9 +25,26 @@ export default class App extends React.Component {
     const previousRoute = previousState.route;
     if (currentRoute === previousRoute) {
       return;
-
     }
-    this.setState({ currentArticleIndex: this.state.route.params.get('articleIndex') });
+    if (this.state.route.path === 'search-results') {
+      const { route } = this.state;
+      const queryString = route.params.get('queryString');
+      const reqString = `https://gnews.io/api/v4/search?${queryString}&token=db7ace67a38e6b5a80d8e73290798c87`;
+      fetch(reqString)
+        .then(res => res.json())
+        .then(result => {
+          const articles = result.articles;
+          this.setState({ articles });
+        });
+    }
+    if (this.state.route.path === '') {
+      fetch('https://gnews.io/api/v4/top-headlines?lang=en&token=db7ace67a38e6b5a80d8e73290798c87')
+        .then(res => res.json())
+        .then(result => {
+          const articles = result.articles;
+          this.setState({ articles });
+        });
+    }
   }
 
   componentDidMount() {
@@ -65,6 +82,9 @@ export default class App extends React.Component {
     }
     if (route.path === 'search') {
       return <SearchForm />;
+    }
+    if (route.path === 'search-results') {
+      return <SearchForm articles={this.state.articles}/>;
     }
   }
 
