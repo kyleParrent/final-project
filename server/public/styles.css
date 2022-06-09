@@ -156,6 +156,14 @@ a:visited {
   border: 1px solid gray;
 }
 
+.form-box-top {
+  border-radius: 20px 20px 0 0;
+}
+
+.form-box-bottom {
+  border-radius: 0 0 20px 20px;
+}
+
 @media screen and (max-width: 430px) {
   .search-bar {
     width: 300px !important;

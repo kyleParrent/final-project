@@ -41,7 +41,7 @@ export default class SearchForm extends React.Component {
       searchParams.append('q', keyword);
     });
     const queryString = searchParams.toString();
-    window.location.hash = `search-results?queryString=${queryString}`;
+    window.location.hash = `search-results?${queryString}`;
   }
 
   render() {
@@ -65,17 +65,17 @@ export default class SearchForm extends React.Component {
         <div className='d-flex justify-content-center'>
           <div className='search-container'>
             <div className='d-flex justify-content-center mt-3'>
-              <h2>Search</h2>
+              <h4>Search</h4>
             </div>
             <form onSubmit={this.handleSubmit}>
               <div>
-                <div className='border-top border-end border-start border-2 border-dark d-flex justify-content-center'>
+                <div className='bg-secondary form-box-top border-top border-end border-start border-2 border-dark d-flex justify-content-center'>
                   <div className="input-group mb-3 mt-3 search-bar border border-1 border-dark rounded-2">
                     <span className="input-group-text" id="keyword">Keywords</span>
                     <input onChange={this.handleChangeKeyword} type="text" className="form-control" placeholder="Article" aria-label="Article" aria-describedby="keyword" required></input>
                   </div>
                 </div>
-                <div className='d-flex justify-content-center border-end border-start border-2 border-dark'>
+                <div className='bg-secondary d-flex justify-content-center border-end border-start border-2 border-dark'>
                   <div className="input-group mb-3 search-bar border border-1 border-dark rounded-2">
                     <label className="input-group-text" htmlFor="inputGroupSelect01">Language</label>
                     <select onChange={this.handleChangeLanguage} className="form-select" id="inputGroupSelect01">
@@ -105,7 +105,7 @@ export default class SearchForm extends React.Component {
                     </select>
                   </div>
                 </div>
-                <div className='d-flex justify-content-center border-end border-start border-2 border-dark'>
+                <div className='bg-secondary d-flex justify-content-center border-end border-start border-2 border-dark'>
                   <div className="input-group mb-3 search-bar border border-1 border-dark rounded-2">
                     <label className="input-group-text" htmlFor="inputGroupSelect01">Country</label>
                     <select onChange={this.handleChangeCountry} className="form-select" id="inputGroupSelect01">
@@ -143,9 +143,9 @@ export default class SearchForm extends React.Component {
                     </select>
                   </div>
                 </div>
-                <div className='d-flex justify-content-center border-bottom border-end border-start border-2 border-dark'>
+                <div className='form-box-bottom bg-secondary d-flex justify-content-center border-bottom border-end border-start border-2 border-dark'>
                   <div className='d-flex justify-content-end search-bar'>
-                    <button className='btn btn-dark mb-2 btn-sm' type='submit'>SUBMIT</button>
+                    <button className='btn btn-dark mb-2 btn-sm' type='submit'>SEARCH</button>
                   </div>
                 </div>
               </div>
