@@ -7,8 +7,7 @@ export default class SearchForm extends React.Component {
     this.state = {
       keywords: '',
       language: '',
-      country: '',
-      articles: null
+      country: ''
     };
     this.handleChangeKeyword = this.handleChangeKeyword.bind(this);
     this.handleChangeLanguage = this.handleChangeLanguage.bind(this);
@@ -110,7 +109,7 @@ export default class SearchForm extends React.Component {
                   <div className="input-group mb-3 search-bar border border-1 border-dark rounded-2">
                     <label className="input-group-text" htmlFor="inputGroupSelect01">Country</label>
                     <select onChange={this.handleChangeCountry} className="form-select" id="inputGroupSelect01">
-                      <option selected>--- Optional ---</option>
+                      <option value="">--- Optional ---</option>
                       <option value="au">Australia</option>
                       <option value="br">Brazil</option>
                       <option value="ca">Canada</option>
