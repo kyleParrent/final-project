@@ -20,7 +20,12 @@ a:link {
 }
 
 a:visited {
-  color: rgb(180, 180, 180);
+  color: black;
+}
+
+.cards:hover {
+  color: black !important;
+  text-decoration-color: #009ffd;
 }
 
 .container {
@@ -46,6 +51,15 @@ a:visited {
 .logo {
   font-family: "Abril Fatface", cursive, sans-serif;
   font-size: 34px;
+  color: darkgray;
+}
+
+.logo:visited {
+  color: darkgray !important;
+}
+
+.logo:hover {
+  color: whitesmoke !important;
 }
 
 .labels {
@@ -162,6 +176,12 @@ a:visited {
 
 .form-box-bottom {
   border-radius: 0 0 20px 20px;
+}
+
+.username {
+  font-size: 20px;
+  padding: 10px;
+  margin: auto;
 }
 
 @media screen and (max-width: 430px) {

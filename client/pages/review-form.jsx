@@ -1,4 +1,6 @@
 import React from 'react';
+import AppContext from '../lib/app-context';
+import Redirect from '../components/redirect';
 
 export default class ReviewForm extends React.Component {
   constructor(props) {
@@ -39,6 +41,8 @@ export default class ReviewForm extends React.Component {
       this.setState({ error: true });
       return;
     }
+    const { user } = this.context;
+    const theToken = window.localStorage.getItem('app-jwt');
     fetch(`/api/article-info?title=${this.props.info.title}&publishedAt=${this.props.info.publishedAt}`)
       .then(res => res.json())
       .then(result => {
@@ -46,7 +50,8 @@ export default class ReviewForm extends React.Component {
           const req = {
             method: 'POST',
             headers: {
-              'Content-Type': 'application/json'
+              'Content-Type': 'application/json',
+              'X-Access-Token': theToken
             },
             body: JSON.stringify({ articleInfo: this.props.info })
           };
@@ -57,14 +62,15 @@ export default class ReviewForm extends React.Component {
               const req = {
                 method: 'POST',
                 headers: {
-                  'Content-Type': 'application/json'
+                  'Content-Type': 'application/json',
+                  'X-Access-Token': theToken
                 },
                 body: JSON.stringify(this.state)
               };
-              fetch(`/api/user-review/${newArticleId}`, req)
+              fetch(`/api/user-review?articleId=${newArticleId}`, req)
                 .then(res => res.json())
                 .then(result => {
-                  window.location.hash = '#user-reviews?userId=1';
+                  window.location.hash = `#user-reviews?userId=${user.userId}`;
                 });
             });
         } else {
@@ -72,20 +78,23 @@ export default class ReviewForm extends React.Component {
           const req = {
             method: 'POST',
             headers: {
-              'Content-Type': 'application/json'
+              'Content-Type': 'application/json',
+              'X-Access-Token': theToken
             },
             body: JSON.stringify(this.state)
           };
-          fetch(`/api/user-review/${articleId}`, req)
+          fetch(`/api/user-review?articleId=${articleId}`, req)
             .then(res => res.json())
             .then(result => {
-              window.location.hash = '#user-reviews?userId=1';
+              window.location.hash = `#user-reviews?userId=${user.userId}`;
             });
         }
       });
   }
 
   render() {
+    const { user } = this.context;
+    if (!user) return <Redirect to="sign-in" />;
     if (this.state.error === true) {
       return (
         <div className='d-flex justify-content-center'>
@@ -148,3 +157,5 @@ export default class ReviewForm extends React.Component {
   }
 
 }
+
+ReviewForm.contextType = AppContext;

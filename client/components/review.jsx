@@ -1,4 +1,5 @@
 import React from 'react';
+import AppContext from '../lib/app-context';
 
 export default class Review extends React.Component {
   componentDidMount() {
@@ -10,6 +11,7 @@ export default class Review extends React.Component {
   }
 
   render() {
+    const { user } = this.context;
     let theButtonClass;
     let theButtonText;
     if (this.props.review.rating === 'inform') {
@@ -27,7 +29,7 @@ export default class Review extends React.Component {
               <div className={theButtonClass}>
                 {theButtonText}
               </div>
-              <p className='mb-0 mt-2'>By: Fakeusername Joe</p>
+              <p className='mb-0 mt-2'>By: {user.username}</p>
             </div>
           </div>
           <div className="row">
@@ -46,3 +48,5 @@ export default class Review extends React.Component {
     );
   }
 }
+
+Review.contextType = AppContext;

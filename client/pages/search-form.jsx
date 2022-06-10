@@ -79,13 +79,10 @@ export default class SearchForm extends React.Component {
       <div>
         <div className='d-flex justify-content-center'>
           <div className='search-container'>
-            <div className='d-flex justify-content-center mt-3'>
-              <h4>Search</h4>
-            </div>
             <form onSubmit={this.handleSubmit}>
               <div>
-                <div className='bg-secondary form-box-top border-top border-end border-start border-2 border-dark d-flex justify-content-center'>
-                  <div className="input-group mb-3 mt-3 search-bar border border-1 border-dark rounded-2">
+                <div className='mt-5 bg-secondary form-box-top border-top border-end border-start border-2 border-dark d-flex justify-content-center'>
+                  <div className="input-group mb-3 mt-4 search-bar border border-1 border-dark rounded-2">
                     <span className="input-group-text" id="keyword">Keywords</span>
                     <input onChange={this.handleChangeKeyword} type="text" className="form-control" placeholder="Article" aria-label="Article" aria-describedby="keyword" required></input>
                   </div>
@@ -121,7 +118,7 @@ export default class SearchForm extends React.Component {
                   </div>
                 </div>
                 <div className='bg-secondary d-flex justify-content-center border-end border-start border-2 border-dark'>
-                  <div className="input-group mb-3 search-bar border border-1 border-dark rounded-2">
+                  <div className="input-group mb-2 search-bar border border-1 border-dark rounded-2">
                     <label className="input-group-text" htmlFor="inputGroupSelect01">Country</label>
                     <select onChange={this.handleChangeCountry} className="form-select" id="inputGroupSelect01">
                       <option value="">--- Optional ---</option>
