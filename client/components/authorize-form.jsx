@@ -55,26 +55,32 @@ export default class AuthorizeForm extends React.Component {
           <label htmlFor="username" className="form-label">
             Username
           </label>
-          <input
-            required
-            autoFocus
-            id="username"
-            type="text"
-            name="username"
-            onChange={handleChange}
-            className="form-control bg-light" />
+          <div className='d-flex justify-content-between'>
+            <i className="fa-solid fa-user username"></i>
+            <input
+              required
+              autoFocus
+              id="username"
+              type="text"
+              name="username"
+              onChange={handleChange}
+              className="form-control bg-light" />
+          </div>
         </div>
         <div className="mb-3">
           <label htmlFor="password" className="form-label">
             Password
           </label>
-          <input
-            required
-            id="password"
-            type="password"
-            name="password"
-            onChange={handleChange}
-            className="form-control bg-light" />
+          <div className='d-flex justify-content-between'>
+            <i className="fa-solid fa-key username"></i>
+            <input
+              required
+              id="password"
+              type="password"
+              name="password"
+              onChange={handleChange}
+              className="form-control bg-light" />
+          </div>
         </div>
         <div className="d-flex justify-content-between align-items-center">
           <small>

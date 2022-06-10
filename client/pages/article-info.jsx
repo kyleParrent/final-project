@@ -95,7 +95,7 @@ export default class ArticleInfo extends React.Component {
                 <h1 className='text-center'>{theArticle.title}</h1>
               </div>
             </div>
-            <div className="row justify-content-center">
+            <div className="mt-4 row justify-content-center">
               <div className="col-11 d-flex justify-content-center">
                 <div className="col-8 border-end border-dark border-3">
                   <h3>From: {theArticle.source.name}</h3>
