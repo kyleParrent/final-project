@@ -2,9 +2,11 @@ require('dotenv/config');
 const pg = require('pg');
 const path = require('path');
 const argon2 = require('argon2');
+const jwt = require('jsonwebtoken');
 const ClientError = require('./client-error');
 const express = require('express');
 const errorMiddleware = require('./error-middleware');
+const authorizationMiddleware = require('./authorization-middleware');
 
 const db = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
@@ -120,6 +122,41 @@ app.post('/api/auth/sign-up', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.post('/api/auth/sign-in', (req, res, next) => {
+  const { username, password } = req.body;
+  if (!username || !password) {
+    throw new ClientError(401, 'invalid login');
+  }
+  const sql = `
+    select "userId",
+           "hashedPassword"
+      from "users"
+     where "username" = $1
+  `;
+  const params = [username];
+  db.query(sql, params)
+    .then(result => {
+      const [user] = result.rows;
+      if (!user) {
+        throw new ClientError(401, 'invalid login');
+      }
+      const { userId, hashedPassword } = user;
+      return argon2
+        .verify(hashedPassword, password)
+        .then(isMatching => {
+          if (!isMatching) {
+            throw new ClientError(401, 'invalid login');
+          }
+          const payload = { userId, username };
+          const token = jwt.sign(payload, process.env.TOKEN_SECRET);
+          res.json({ token, user: payload });
+        });
+    })
+    .catch(err => next(err));
+});
+
+app.use(authorizationMiddleware);
+
 app.post('/api/article-review', (req, res, next) => {
   const { articleInfo } = req.body;
   const theImage = articleInfo.image;
@@ -143,16 +180,15 @@ app.post('/api/article-review', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.post('/api/user-review/:newArticleId', (req, res, next) => {
-  const articleId = Number(req.params.newArticleId);
-  const fakeUserId = 1;
+app.post('/api/user-review', (req, res, next) => {
+  const { userId, articleId } = req.query;
   const { currentRating, currentReview } = req.body;
   const sql = `
         insert into "reviews" ("articleId", "userId", "rating", "comments", "createdAt")
         values ($1, $2, $3, $4, now())
         returning *
       `;
-  const params = [articleId, fakeUserId, currentRating, currentReview];
+  const params = [articleId, userId, currentRating, currentReview];
   db.query(sql, params)
     .then(result => {
       const article = result.rows;

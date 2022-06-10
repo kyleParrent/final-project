@@ -24,10 +24,12 @@ export default class ReviewInfo extends React.Component {
   }
 
   render() {
-    if (this.state.reviews === []) {
+    if (this.state.reviews.length === 0) {
       return (
-        <div>
-          <p>No Reviews</p>
+        <div className="row justify-content-center">
+          <div className='d-flex justify-content-center align-items-center mt-4'>
+            <h1>You have no reviews</h1>
+          </div>
         </div>
       );
     }
