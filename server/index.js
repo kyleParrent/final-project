@@ -197,7 +197,8 @@ app.post('/api/article-review', (req, res, next) => {
 });
 
 app.post('/api/user-review', (req, res, next) => {
-  const { userId, articleId } = req.query;
+  const { articleId } = req.query;
+  const { userId } = req.user;
   const { currentRating, currentReview } = req.body;
   const sql = `
         insert into "reviews" ("articleId", "userId", "rating", "comments", "createdAt")

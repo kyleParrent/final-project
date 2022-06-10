@@ -67,7 +67,7 @@ export default class ReviewForm extends React.Component {
                 },
                 body: JSON.stringify(this.state)
               };
-              fetch(`/api/user-review?articleId=${newArticleId}&userId=${user.userId}`, req)
+              fetch(`/api/user-review?articleId=${newArticleId}`, req)
                 .then(res => res.json())
                 .then(result => {
                   window.location.hash = `#user-reviews?userId=${user.userId}`;
@@ -83,7 +83,7 @@ export default class ReviewForm extends React.Component {
             },
             body: JSON.stringify(this.state)
           };
-          fetch(`/api/user-review?articleId=${articleId}&userId=${user.userId}`, req)
+          fetch(`/api/user-review?articleId=${articleId}`, req)
             .then(res => res.json())
             .then(result => {
               window.location.hash = `#user-reviews?userId=${user.userId}`;
