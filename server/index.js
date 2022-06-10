@@ -99,6 +99,22 @@ app.get('/api/all-user-reviews/:articleId', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/usernames/:userId', (req, res, next) => {
+  const userId = Number(req.params.userId);
+  const sql = `
+    select *
+      from "users"
+      where "userId" = $1
+  `;
+  const params = [userId];
+  db.query(sql, params)
+    .then(result => {
+      const theArticle = result.rows[0];
+      res.json(theArticle);
+    })
+    .catch(err => next(err));
+});
+
 app.post('/api/auth/sign-up', (req, res, next) => {
   const { username, password } = req.body;
   if (!username || !password) {

@@ -46,9 +46,25 @@ export default class ArticleInfo extends React.Component {
     if (!this.state.articleInfo) {
       return;
     }
-    const button = this.props.reviewedArticleId
-      ? <a className="btn btn-secondary d-flex m-2 text-white info-button" role="button">Already Reviewed</a>
-      : <a className="btn btn-dark d-flex m-2 text-white info-button" href={`#review?articleIndex=${this.props.articleIndex}`} role="button">Rate / Review</a>;
+    const { user } = this.context;
+    let button = <a className="btn btn-dark d-flex m-2 text-white info-button" href={`#review?articleIndex=${this.props.articleIndex}`} role="button">Rate / Review</a>;
+    if (user) {
+      if (this.state.articleReviews.length !== 0) {
+        for (let i = 0; i < this.state.articleReviews.length; i++) {
+          const current = this.state.articleReviews[i];
+          for (const property in current) {
+            if (property === 'userId') {
+              if (current[property] === user.userId) {
+                button = <a className="btn btn-secondary d-flex m-2 text-white info-button" role="button">Already Reviewed</a>;
+              }
+            }
+          }
+        }
+      }
+    }
+    if (this.props.reviewedArticleId) {
+      button = <a className="btn btn-secondary d-flex m-2 text-white info-button" role="button">Already Reviewed</a>;
+    }
     const theArticle = this.state.articleInfo;
     const theDate = theArticle.publishedAt;
     const date = theDate.split('T');

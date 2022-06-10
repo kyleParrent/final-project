@@ -44,7 +44,7 @@ export default class App extends React.Component {
         });
     }
     if (this.state.route.path === '') {
-      fetch('https://gnews.io/api/v4/top-headlines?lang=en&token=db7ace67a38e6b5a80d8e73290798c87')
+      fetch('https://gnews.io/api/v4/top-headlines?lang=en&country=us&token=db7ace67a38e6b5a80d8e73290798c87')
         .then(res => res.json())
         .then(result => {
           const articles = result.articles;
@@ -61,7 +61,7 @@ export default class App extends React.Component {
     const token = window.localStorage.getItem('react-context-jwt');
     const user = token ? jwtDecode(token) : null;
     this.setState({ user, isAuthorizing: false });
-    fetch('https://gnews.io/api/v4/top-headlines?lang=en&token=db7ace67a38e6b5a80d8e73290798c87')
+    fetch('https://gnews.io/api/v4/top-headlines?lang=en&country=us&token=db7ace67a38e6b5a80d8e73290798c87')
       .then(res => res.json())
       .then(result => {
         const articles = result.articles;
