@@ -1,5 +1,6 @@
 import React from 'react';
 import AppContext from '../lib/app-context';
+import Redirect from './redirect';
 
 export default class Review extends React.Component {
   componentDidMount() {
@@ -12,6 +13,9 @@ export default class Review extends React.Component {
 
   render() {
     const { user } = this.context;
+    if (!user) {
+      return <Redirect to="#" />;
+    }
     let theButtonClass;
     let theButtonText;
     if (this.props.review.rating === 'inform') {
