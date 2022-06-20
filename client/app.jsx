@@ -36,7 +36,7 @@ export default class App extends React.Component {
     if (this.state.route.path === 'search-results') {
       const { route } = this.state;
       const queryString = route.params;
-      const reqString = `https://gnews.io/api/v4/search?${queryString}&token=f485f1a41660631de98dd6421698b875`;
+      const reqString = `https://gnews.io/api/v4/search?${queryString}&token=${process.env.API_KEY}`;
       this.setState({ isLoading: true });
       fetch(reqString)
         .then(res => res.json())
@@ -47,7 +47,7 @@ export default class App extends React.Component {
     }
     if (this.state.route.path === '') {
       this.setState({ isLoading: true });
-      fetch('https://gnews.io/api/v4/top-headlines?lang=en&country=us&token=f485f1a41660631de98dd6421698b875')
+      fetch(`https://gnews.io/api/v4/top-headlines?lang=en&country=us&token=${process.env.API_KEY}`)
         .then(res => res.json())
         .then(result => {
           const articles = result.articles;
