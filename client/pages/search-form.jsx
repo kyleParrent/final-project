@@ -1,5 +1,6 @@
 import React from 'react';
 import Article from '../components/article';
+import AppContext from '../lib/app-context';
 
 export default class SearchForm extends React.Component {
   constructor(props) {
@@ -45,6 +46,7 @@ export default class SearchForm extends React.Component {
   }
 
   render() {
+    const { isLoading } = this.context;
     let result = null;
     if (this.props.articles) {
       if (this.props.articles.length === 0) {
@@ -74,6 +76,16 @@ export default class SearchForm extends React.Component {
           </div>
         );
       }
+    }
+    if (isLoading === true) {
+      result = (
+        <div className="text-center mt-4">
+          <h2>Results</h2>
+          <div className="spinner-border" role="status">
+            <span className="sr-only">Loading...</span>
+          </div>
+        </div>
+      );
     }
     return (
       <div>
@@ -174,3 +186,5 @@ export default class SearchForm extends React.Component {
     );
   }
 }
+
+SearchForm.contextType = AppContext;

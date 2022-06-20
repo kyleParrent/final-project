@@ -4,8 +4,8 @@ export default class AuthorizeForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      password: ''
+      username: 'DummyUser1',
+      password: 'DummyUser1Pass'
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -40,6 +40,8 @@ export default class AuthorizeForm extends React.Component {
   render() {
     const { action } = this.props;
     const { handleChange, handleSubmit } = this;
+    const dummyUsername = 'DummyUser1';
+    const dummyPassword = 'DummyUser1Pass';
     const alternateActionHref = action === 'sign-up'
       ? '#sign-in'
       : '#sign-up';
@@ -63,6 +65,7 @@ export default class AuthorizeForm extends React.Component {
               id="username"
               type="text"
               name="username"
+              value={dummyUsername}
               onChange={handleChange}
               className="form-control bg-light" />
           </div>
@@ -78,6 +81,7 @@ export default class AuthorizeForm extends React.Component {
               id="password"
               type="password"
               name="password"
+              value={dummyPassword}
               onChange={handleChange}
               className="form-control bg-light" />
           </div>
