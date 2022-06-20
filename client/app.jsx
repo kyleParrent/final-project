@@ -20,7 +20,8 @@ export default class App extends React.Component {
       isAuthorizing: true,
       route,
       articles: [],
-      currentArticleIndex: route.params.get('articleIndex')
+      currentArticleIndex: route.params.get('articleIndex'),
+      isLoading: false
     };
     this.handleSignIn = this.handleSignIn.bind(this);
     this.handleSignOut = this.handleSignOut.bind(this);
@@ -36,19 +37,21 @@ export default class App extends React.Component {
       const { route } = this.state;
       const queryString = route.params;
       const reqString = `https://gnews.io/api/v4/search?${queryString}&token=f485f1a41660631de98dd6421698b875`;
+      this.setState({ isLoading: true });
       fetch(reqString)
         .then(res => res.json())
         .then(result => {
           const articles = result.articles;
-          this.setState({ articles });
+          this.setState({ articles, isLoading: false });
         });
     }
     if (this.state.route.path === '') {
+      this.setState({ isLoading: true });
       fetch('https://gnews.io/api/v4/top-headlines?lang=en&country=us&token=f485f1a41660631de98dd6421698b875')
         .then(res => res.json())
         .then(result => {
           const articles = result.articles;
-          this.setState({ articles });
+          this.setState({ articles, isLoading: false });
         });
     }
   }
@@ -112,9 +115,9 @@ export default class App extends React.Component {
   }
 
   render() {
-    const { user, route } = this.state;
+    const { user, route, isLoading } = this.state;
     const { handleSignIn, handleSignOut } = this;
-    const contextValue = { user, route, handleSignIn, handleSignOut };
+    const contextValue = { user, route, isLoading, handleSignIn, handleSignOut };
     return (
       <AppContext.Provider value={contextValue}>
         <div>
