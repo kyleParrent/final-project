@@ -54,7 +54,6 @@ Try the application live at https://the-opinion.herokuapp.com/
     * DATABASE_URL
     * API_KEY
 
-!!WARNING Do NOT add these to your .env file. Only add to Heroku!!
-
+###!!WARNING Do NOT add these to your .env file. Only add to Heroku!!
     * TOKEN_SECRET (use a dummy token in .env for now)
 
