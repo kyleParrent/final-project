@@ -63,12 +63,12 @@ export default class App extends React.Component {
     });
     const token = window.localStorage.getItem('react-context-jwt');
     const user = token ? jwtDecode(token) : null;
-    this.setState({ user, isAuthorizing: false });
+    this.setState({ user, isAuthorizing: false, isLoading: true });
     fetch('https://gnews.io/api/v4/top-headlines?lang=en&country=us&token=f485f1a41660631de98dd6421698b875')
       .then(res => res.json())
       .then(result => {
         const articles = result.articles;
-        this.setState({ articles });
+        this.setState({ articles, isLoading: false });
       });
   }
 

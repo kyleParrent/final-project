@@ -65,7 +65,7 @@ export default class AuthorizeForm extends React.Component {
               id="username"
               type="text"
               name="username"
-              value={dummyUsername}
+              defaultValue={dummyUsername}
               onChange={handleChange}
               className="form-control bg-light" />
           </div>
@@ -81,7 +81,7 @@ export default class AuthorizeForm extends React.Component {
               id="password"
               type="password"
               name="password"
-              value={dummyPassword}
+              defaultValue={dummyPassword}
               onChange={handleChange}
               className="form-control bg-light" />
           </div>
