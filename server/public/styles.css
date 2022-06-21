@@ -31,15 +31,6 @@ a:visited {
 .logo {
   font-family: "Abril Fatface", cursive, sans-serif;
   font-size: 34px;
-  color: darkgray;
-}
-
-.logo:visited {
-  color: darkgray !important;
-}
-
-.logo:hover {
-  color: whitesmoke !important;
 }
 
 .labels {
