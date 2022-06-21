@@ -44,15 +44,15 @@ Try the application live at https://the-opinion.herokuapp.com/
 
 ### Getting Started
 
-•	Copy the .env.example file by using the command: cp .env.example .env
-•	Install all dependencies using the command: npm i
-•	Set up a database using Postgresql
-•	3rd party account set-up:
-o	Create a GNews API account (https://gnews.io/)
-o	Create a Heroku account
-o	Set your environment variables on Heroku and .env file
-	DATABASE_URL
-	API_KEY
+..*	Copy the .env.example file by using the command: cp .env.example .env
+..*	Install all dependencies using the command: npm i
+..*	Set up a database using Postgresql
+..*	3rd party account set-up:
+  ..* Create a GNews API account (https://gnews.io/)
+  ..* Create a Heroku account
+  ..* Set your environment variables on Heroku and .env file
+    ..* DATABASE_URL
+    ..* API_KEY
 !!!WARNING Do NOT add these to your .env file. Only add to Heroku!!!
-	TOKEN_SECRET (use a dummy token in .env for now)
+    ..* TOKEN_SECRET (use a dummy token in .env for now)
 
