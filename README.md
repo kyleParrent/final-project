@@ -50,10 +50,8 @@ Try the application live at https://the-opinion.herokuapp.com/
 *	3rd party account set-up:
   * Create a GNews API account (https://gnews.io/)
   * Create a Heroku account
-  * Set your environment variables on Heroku and .env file
+  * Set your environment variables on Heroku
     * DATABASE_URL
     * API_KEY
-
-###!!WARNING Do NOT add these to your .env file. Only add to Heroku!!
-    * TOKEN_SECRET (use a dummy token in .env for now)
+    * TOKEN_SECRET (DO NOT add real token secret to .env, use dummy data from example for now)
 
