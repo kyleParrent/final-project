@@ -71,9 +71,11 @@ export default class ArticleInfo extends React.Component {
     let newSection;
     if (this.state.articleReviews.length === 0) {
       newSection = (
-        <div className='row'>
-          <div className='col-12 d-flex justify-content-center'>
+        <div className='border border-2 border-dark no-reviews mb-4 ms-4 me-4'>
+          <div className='row'>
+            <div className='col-12 d-flex justify-content-center'>
               <h3 className='m-3'>No User Reviews</h3>
+            </div>
           </div>
         </div>
       );
@@ -86,7 +88,7 @@ export default class ArticleInfo extends React.Component {
     return (
       <div>
         <div className='d-flex justify-content-center m-4' id='main'>
-          <div className='border border-2 border-dark info-box'>
+          <div className='info-box'>
             <div className='row justify-content-center'>
               <div className="col-11">
                 <div className='d-flex justify-content-center'>
@@ -122,7 +124,7 @@ export default class ArticleInfo extends React.Component {
             <h1>Ratings / Reviews</h1>
           </div>
           <div className='col-12 d-flex justify-content-center'>
-            <div className='border border-2 border-dark no-reviews mb-4 ms-4 me-4'>
+            <div className='no-reviews mb-4 ms-4 me-4'>
               {
                newSection
               }
