@@ -44,7 +44,7 @@ Try the application live at https://the-opinion.herokuapp.com/
 
 ### Getting Started
 
-..*	Copy the .env.example file by using the command: cp .env.example .env
+*	Copy the .env.example file by using the command: cp .env.example .env
 ..*	Install all dependencies using the command: npm i
 ..*	Set up a database using Postgresql
 ..*	3rd party account set-up:
