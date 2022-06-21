@@ -28,38 +28,9 @@ a:visited {
   text-decoration-color: #009ffd;
 }
 
-.container {
-  width: 900px;
-}
-
-.info-box {
-  width: 900px;
-}
-
-.review-container {
-  width: 900px;
-}
-
-.search-container {
-  width: 500px;
-}
-
-.search-bar {
-  width: 400px !important;
-}
-
 .logo {
   font-family: "Abril Fatface", cursive, sans-serif;
   font-size: 34px;
-  color: darkgray;
-}
-
-.logo:visited {
-  color: darkgray !important;
-}
-
-.logo:hover {
-  color: whitesmoke !important;
 }
 
 .labels {
@@ -123,13 +94,6 @@ a:visited {
   text-decoration: none;
 }
 
-.problem {
-  height: 150px;
-  width: 400px;
-  background-color: rgb(24, 24, 24);
-  border-radius: 10px;
-}
-
 .overlay {
   position: fixed;
   width: 100%;
@@ -151,43 +115,16 @@ a:visited {
   text-align: center;
 }
 
-.no-reviews {
-  width: 900px;
-}
-
-.outline {
-  border: 1px solid black;
-}
-
-.reviews-box {
-  border: 1px solid black;
-  width: 900px !important;
-}
-
 .review-link {
   text-align: center;
   width: 800px;
   border: 1px solid gray;
 }
 
-.form-box-top {
-  border-radius: 20px 20px 0 0;
-}
-
-.form-box-bottom {
-  border-radius: 0 0 20px 20px;
-}
-
 .username {
   font-size: 20px;
   padding: 10px;
   margin: auto;
-}
-
-@media screen and (max-width: 430px) {
-  .search-bar {
-    width: 300px !important;
-  }
 }
 
 @media screen and (max-width: 430px) {
@@ -201,17 +138,8 @@ a:visited {
 }
 
 @media screen and (max-width: 400px) {
-  .problem {
-    border-radius: 0;
-  }
-
   .info-button {
     font-size: 12px !important;
-  }
-
-  #main {
-    margin: 5px !important;
-    margin-top: 20px !important;
   }
 }
 
@@ -229,10 +157,6 @@ a:visited {
   .info-button {
     font-size: 8px !important;
   }
-
-  .search-bar {
-    width: 250px !important;
-  }
 }
 
 @media screen and (max-width: 320px) {
@@ -248,9 +172,5 @@ a:visited {
 
   .descript {
     font-size: 8px !important;
-  }
-
-  .search-bar {
-    width: 225px !important;
   }
 }

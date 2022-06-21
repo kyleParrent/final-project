@@ -25,7 +25,7 @@ export default class Navbar extends React.Component {
     return (
       <nav className="navbar navbar-expand-md bg-dark navbar-dark">
         <div className='container'>
-          <a href="#" className="nav-link logo p-0">THE OPINION</a>
+          <a href="#" className="nav-link logo p-0 text-white">THE OPINION</a>
           <button className="navbar-toggler" type='button' data-bs-toggle="collapse" data-bs-target="#navmenu"><span className="navbar-toggler-icon"></span></button>
           <div className="collapse navbar-collapse" id="navmenu">
             <ul className="navbar-nav ms-auto">
