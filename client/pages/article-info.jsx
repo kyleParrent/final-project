@@ -69,6 +69,7 @@ export default class ArticleInfo extends React.Component {
     const theDate = theArticle.publishedAt;
     const date = theDate.split('T');
     let newSection;
+    let percent;
     if (this.state.articleReviews.length === 0) {
       newSection = (
         <div className='border border-2 border-dark no-reviews mb-4 ms-4 me-4'>
@@ -80,6 +81,7 @@ export default class ArticleInfo extends React.Component {
         </div>
       );
     } else {
+      percent = <PercentCalc />
       newSection = this.state.articleReviews.map((article, index) => {
         return <AllReviews key={index} article={article} index={index} />;
       });
