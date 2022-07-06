@@ -2,11 +2,11 @@ import React from 'react';
 
 export default class PercentCalc extends React.Component {
   constructor(props) {
-  super(props);
-  this.state = {
-    inform: null,
-    persuade: null
-  }
+    super(props);
+    this.state = {
+      inform: null,
+      persuade: null
+    };
   }
 
   componentDidMount() {
@@ -18,6 +18,6 @@ export default class PercentCalc extends React.Component {
   }
 
   render() {
-
+    return null;
   }
 }

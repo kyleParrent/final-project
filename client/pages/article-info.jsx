@@ -1,6 +1,7 @@
 import React from 'react';
 import AppContext from '../lib/app-context';
 import AllReviews from '../components/all-reviews';
+import PercentCalc from '../components/percent-calc';
 
 export default class ArticleInfo extends React.Component {
   constructor(props) {
@@ -81,7 +82,7 @@ export default class ArticleInfo extends React.Component {
         </div>
       );
     } else {
-      percent = <PercentCalc />
+      percent = <PercentCalc />;
       newSection = this.state.articleReviews.map((article, index) => {
         return <AllReviews key={index} article={article} index={index} />;
       });
@@ -121,6 +122,9 @@ export default class ArticleInfo extends React.Component {
             </div>
           </div>
         </div>
+        {
+          percent
+        }
         <div className="row justify-content-center">
           <div className='d-flex justify-content-center align-items-center mt-4'>
             <h1>Ratings / Reviews</h1>
