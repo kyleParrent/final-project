@@ -51,12 +51,28 @@ app.get('/api/article-info', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.get('/api/reviews/:userId', (req, res, next) => {
+app.get('/api/reviews/percent', (req, res, next) => {
+  const userId = Number(req.params.userId);
+  const sql = `
+    select count("rating")
+      from "reviews"
+      where "rating" = 'inform'
+  `;
+  const params = [userId];
+  db.query(sql, params)
+    .then(result => {
+      const theReviews = result.rows;
+      res.json(theReviews);
+    })
+    .catch(err => next(err));
+});
+
+app.get('/api/reviews/:articleId', (req, res, next) => {
   const userId = Number(req.params.userId);
   const sql = `
     select *
       from "reviews"
-      where "userId" = $1
+      where "articleId" = $1
   `;
   const params = [userId];
   db.query(sql, params)
