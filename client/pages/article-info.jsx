@@ -1,6 +1,7 @@
 import React from 'react';
 import AppContext from '../lib/app-context';
 import AllReviews from '../components/all-reviews';
+import Percent from '../components/percent';
 
 export default class ArticleInfo extends React.Component {
   constructor(props) {
@@ -69,6 +70,7 @@ export default class ArticleInfo extends React.Component {
     const theDate = theArticle.publishedAt;
     const date = theDate.split('T');
     let newSection;
+    let percent;
     if (this.state.articleReviews.length === 0) {
       newSection = (
         <div className='border border-2 border-dark no-reviews mb-4 ms-4 me-4'>
@@ -80,6 +82,7 @@ export default class ArticleInfo extends React.Component {
         </div>
       );
     } else {
+      percent = <Percent articleId={this.state.articleReviews[0].articleId} />;
       newSection = this.state.articleReviews.map((article, index) => {
         return <AllReviews key={index} article={article} index={index} />;
       });
@@ -119,6 +122,9 @@ export default class ArticleInfo extends React.Component {
             </div>
           </div>
         </div>
+        {
+          percent
+        }
         <div className="row justify-content-center">
           <div className='d-flex justify-content-center align-items-center mt-4'>
             <h1>Ratings / Reviews</h1>
