@@ -80,7 +80,7 @@ export default class SearchForm extends React.Component {
     if (isLoading === true) {
       result = (
         <div className="text-center mt-4">
-          <h2>Results</h2>
+          <h2 className='mb-4'>Results</h2>
           <div className="spinner-border" role="status">
             <span className="sr-only">Loading...</span>
           </div>

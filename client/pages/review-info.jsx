@@ -5,7 +5,8 @@ export default class ReviewInfo extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      reviews: []
+      reviews: [],
+      isChecking: true
     };
   }
 
@@ -19,11 +20,21 @@ export default class ReviewInfo extends React.Component {
     fetch(`/api/reviews/${this.props.userId}`, req)
       .then(res => res.json())
       .then(result => {
-        this.setState({ reviews: result });
+        this.setState({ reviews: result, isChecking: false });
       });
   }
 
   render() {
+    if (this.state.isChecking === true) {
+      return (
+          <div className="text-center mt-4">
+            <h1 className='mb-4'>Your Opinions</h1>
+            <div className="spinner-border" role="status">
+              <span className="sr-only">Loading...</span>
+            </div>
+          </div>
+      );
+    }
     if (this.state.reviews.length === 0) {
       return (
         <div className="row justify-content-center">
