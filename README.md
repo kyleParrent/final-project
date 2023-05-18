@@ -17,7 +17,7 @@ A full-stack web application for readers who want to rate and review articles.
 ## Live Demo
 
 The Opinion was my first solo full-stack project. The idea came from a common issue many have of differentiating between articles selling you an opinion or telling you the facts of a story. I wanted to create a site that took articles from all around the world and allow users to determine this for themselves.
-Try the application live at https://the-opinion.herokuapp.com/
+
 
 ## Features
 
